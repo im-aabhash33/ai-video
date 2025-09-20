@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SRG COMPUTER - Enroll Today</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Arial', sans-serif;
+        }
+        
+        body {
+            background: #0a0a1a;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .video-container {
+            width: 100%;
+            max-width: 500px;
+            height: 100vh;
+            max-height: 888px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a2a 0%, #1a1a4a 100%);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .scene {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .cube {
+            width: 150px;
+            height: 150px;
+            position: relative;
+            transform-style: preserve-3d;
+            transform: rotateX(-15deg) rotateY(15deg);
+            animation: rotate 8s infinite linear;
+        }
+        
+        .face {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background: rgba(30, 144, 255, 0.1);
+            border: 2px solid #1e90ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 40px;
+            color: #4deeea;
+            box-shadow: 0 0 15px rgba(77, 238, 234, 0.5);
+        }
+        
+        .front { transform: translateZ(75px); }
+        .back { transform: rotateY(180deg) translateZ(75px); }
+        .right { transform: rotateY(90deg) translateZ(75px); }
+        .left { transform: rotateY(-90deg) translateZ(75px); }
+        .top { transform: rotateX(90deg) translateZ(75px); }
+        .bottom { transform: rotateX(-90deg) translateZ(75px); }
+        
+        .text {
+            font-size: 28px;
+            font-weight: 700;
+            margin-top: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(77, 238, 234, 0.8);
+            color: #ffffff;
+            letter-spacing: 1px;
+        }
+        
+        .cards-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .card {
+            width: 110px;
+            height: 110px;
+            background: rgba(20, 20, 60, 0.8);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(77, 238, 234, 0.5);
+            border: 1px solid #4deeea;
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        
+        .student {
+            width: 180px;
+            height: 180px;
+            position: relative;
+            margin-bottom: 30px;
+        }
+        
+        .platform {
+            width: 200px;
+            height: 20px;
+            background: linear-gradient(90deg, #4deeea, #1e90ff);
+            border-radius: 10px;
+            margin-top: -10px;
+            box-shadow: 0 0 20px rgba(77, 238, 234, 0.8);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .platform-text {
+            position: absolute;
+            top: -30px;
+            width: 100%;
+            text-align: center;
+            font-weight: 700;
+            font-size: 18px;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+        
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff4dee;
+            opacity: 0;
+        }
+        
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: #4deeea;
+            text-shadow: 0 0 15px rgba(77, 238, 234, 0.8);
+            letter-spacing: 1px;
+        }
+        
+        .contact {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+            margin-top: 20px;
+            background: rgba(20, 20, 60, 0.8);
+            padding: 15px 30px;
+            border-radius: 15px;
+            border: 2px solid #4deeea;
+            box-shadow: 0 0 20px rgba(77, 238, 234, 0.5);
+        }
+        
+        .contact div {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .icon {
+            font-size: 24px;
+            color: #4deeea;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotateX(-15deg) rotateY(0deg); }
+            100% { transform: rotateX(-15deg) rotateY(360deg); }
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            background: rgba(30, 144, 255, 0.3);
+            color: white;
+            border: 1px solid #4deeea;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: rgba(30, 144, 255, 0.5);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <!-- Scene 1: Opening -->
+        <div class="scene" id="scene1">
+            <div class="cube">
+                <div class="face front">💻</div>
+                <div class="face back">{ }</div>
+                <div class="face right">📊</div>
+                <div class="face left">🎓</div>
+                <div class="face top">📈</div>
+                <div class="face bottom">🎧</div>
+            </div>
+            <div class="text">Learn. Build. Succeed.</div>
+        </div>
+        
+        <!-- Scene 2: Benefits -->
+        <div class="scene" id="scene2">
+            <div class="cards-container">
+                <div class="card" id="card1">Practical Courses</div>
+                <div class="card" id="card2">Live Mentors</div>
+                <div class="card" id="card3">Job Support</div>
+            </div>
+        </div>
+        
+        <!-- Scene 3: Student Outcome -->
+        <div class="scene" id="scene3">
+            <div class="student">
+                <div class="confetti" style="top: 40px; left: 30px;"></div>
+                <div class="confetti" style="top: 20px; left: 90px;"></div>
+                <div class="confetti" style="top: 60px; left: 150px;"></div>
+                <div class="confetti" style="top: 30px; left: 60px;"></div>
+                <div class="confetti" style="top: 70px; left: 120px;"></div>
+                <div class="platform">
+                    <div class="platform-text">JOB</div>
+                </div>
+            </div>
+            <div class="text">Start in 4 weeks.</div>
+        </div>
+        
+        <!-- Scene 4: CTA -->
+        <div class="scene" id="scene4">
+            <div class="logo">SRG COMPUTER</div>
+            <div class="contact">
+                <div>
+                    <span class="icon">📱</span>
+                    <span>9891396090</span>
+                </div>
+                <div>
+                    <span class="icon">✉</span>
+                    <span>join.srg@gmail.com</span>
+                </div>
+            </div>
+            <div class="text">ENROLL NOW</div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="replay">Replay</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scenes = document.querySelectorAll('.scene');
+            const cards = document.querySelectorAll('.card');
+            const confetti = document.querySelectorAll('.confetti');
+            const replayBtn = document.getElementById('replay');
+            
+            // Initial state
+            scenes[0].style.opacity = 1;
+            
+            // Animation timeline
+            const timeline = [
+                // Scene 1: 0-2 seconds
+                { time: 0, action: () => scenes[0].style.opacity = 1 },
+                { time: 2000, action: () => scenes[0].style.opacity = 0 },
+                
+                // Scene 2: 2-8 seconds
+                { time: 2000, action: () => scenes[1].style.opacity = 1 },
+                { time: 2500, action: () => {
+                    cards[0].style.opacity = 1;
+                    cards[0].style.transform = 'translateY(0)';
+                    cards[0].style.animation = 'float 2s infinite';
+                }},
+                { time: 3500, action: () => {
+                    cards[1].style.opacity = 1;
+                    cards[1].style.transform = 'translateY(0)';
+                    cards[1].style.animation = 'float 2s infinite 0.3s';
+                }},
+                { time: 4500, action: () => {
+                    cards[2].style.opacity = 1;
+                    cards[2].style.transform = 'translateY(0)';
+                    cards[2].style.animation = 'float 2s infinite 0.6s';
+                }},
+                { time: 8000, action: () => scenes[1].style.opacity = 0 },
+                
+                // Scene 3: 8-12 seconds
+                { time: 8000, action: () => scenes[2].style.opacity = 1 },
+                { time: 9000, action: () => {
+                    confetti.forEach(conf => {
+                        conf.style.opacity = 1;
+                        conf.style.animation = 'fadeIn 0.5s forwards';
+                    });
+                }},
+                { time: 12000, action: () => scenes[2].style.opacity = 0 },
+                
+                // Scene 4: 12-15 seconds
+                { time: 12000, action: () => scenes[3].style.opacity = 1 },
+                { time: 15000, action: () => {} }
+            ];
+            
+            // Function to run the animation
+            function runAnimation() {
+                // Reset all scenes
+                scenes.forEach(scene => scene.style.opacity = 0);
+                cards.forEach(card => {
+                    card.style.opacity = 0;
+                    card.style.transform = 'translateY(50px)';
+                    card.style.animation = 'none';
+                });
+                confetti.forEach(conf => conf.style.opacity = 0);
+                
+                // Execute each step in the timeline
+                timeline.forEach(step => {
+                    setTimeout(step.action, step.time);
+                });
+            }
+            
+            // Initial run
+            runAnimation();
+            
+            // Replay button
+            replayBtn.addEventListener('click', runAnimation);
+            
+            // Auto-replay every 16 seconds
+            setInterval(runAnimation, 16000);
+        });
+    </script>
+</body>
+</html>
